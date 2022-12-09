@@ -21,6 +21,11 @@ class Queue {
     return this.queue[this.queue.length - 1];
   }
 
+  showHead() {
+    console.log(this.queue[0]);
+    return this.queue[0];
+  }
+
   saveQueue() {
     localforage
       .setItem(this.name, this.queue)
@@ -45,5 +50,6 @@ class Queue {
 const fifo = new Queue("Jason");
 fifo.pushHead("Pushed borzus", "Blubazaurus");
 fifo.showTail();
+fifo.showHead();
 fifo.popTail();
 fifo.getQueue();
