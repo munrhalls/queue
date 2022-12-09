@@ -4,8 +4,15 @@ class Queue {
     this.queue = [];
   }
 
-  pushHead(element) {
-    this.queue.unshift(element);
+  pushHead(...elements) {
+    for (let el of elements) {
+      this.queue.unshift(el);
+    }
+    this.saveQueue(this.name, this.queue);
+  }
+
+  popTail() {
+    this.queue.pop();
     this.saveQueue(this.name, this.queue);
   }
 
@@ -31,25 +38,5 @@ class Queue {
 }
 
 const fifo = new Queue("Jason");
-fifo.pushHead("Pushed borzus");
+fifo.pushHead("Pushed borzus", "Blubazaurus");
 fifo.getQueue();
-
-// function saveQueue(name, queue) {
-//   localforage
-//     .setItem(name, queue)
-//     .then(function (value) {})
-//     .catch(function (err) {
-//       console.log(err);
-//     });
-// }
-
-// function getQueue() {
-//   localforage
-//     .getItem(fifo.toString())
-//     .then(function (value) {
-//       console.log(value);
-//     })
-//     .catch(function (err) {
-//       console.log(err);
-//     });
-// }
