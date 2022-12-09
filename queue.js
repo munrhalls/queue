@@ -5,7 +5,7 @@ class Queue {
   }
 
   pushHead(...elements) {
-    for (let el of elements) {
+    for (let el of elements.reverse()) {
       this.queue.unshift(el);
     }
     this.saveQueue(this.name, this.queue);
@@ -14,6 +14,11 @@ class Queue {
   popTail() {
     this.queue.pop();
     this.saveQueue(this.name, this.queue);
+  }
+
+  showTail() {
+    console.log(this.queue[this.queue.length - 1]);
+    return this.queue[this.queue.length - 1];
   }
 
   saveQueue() {
@@ -39,4 +44,6 @@ class Queue {
 
 const fifo = new Queue("Jason");
 fifo.pushHead("Pushed borzus", "Blubazaurus");
+fifo.showTail();
+fifo.popTail();
 fifo.getQueue();
