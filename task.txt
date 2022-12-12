@@ -2,46 +2,6 @@
 
 
 
-Konstruktora klasy - sprawdza czy w localForge jest już kolejka (fifo) o podanej nazwie, jeśli
-tak to podłącza się do niej, jeśli nie to tworzy całą strukturę od zera.
-
-Klasa kolejki musi mieć pola head i tail z odpowiednimi wskazaniami na localForage
-
-Metoda Push wkłada element do kolejki a więc modyfikuje Head i tylko to
-
-Każdy element kolejki ma trzy pola prev next i value gdzie next wskazuje na kolejny
-element kolejki, value przechoduje wartość wstawioną do kolejki
-
-head wskazuje na pierwszy element a tail na ostatni
-
-
-
-
-
-
-
-const fifo = new Queue(&quot;SomeFifoName&quot;) 
-//Gdzie SomeFifoName jest nazwą wykorzystywaną do zapisywania potrzebnych danych w localForage
-
-
-fifo.push_head(element) //Metoda wstawia element (np string, lub coś
-innego) do kolejki (od strony Head)- modyfikuje zawartość localForage i
-wychodzi
-
-
-
-fifo.pop_tail() //Metoda pobiera element z kolejki (od strony Tail) i
-usuwa go z kolejki
-
-
-
-fifo.tail() //metoda zwraca/podgląda (ale nie usuwa) element z kolejki (od
-strony tail)
-
-
-
-fifo.head() //metoda zwraca/podgląda (ale nie usuwa) element z kolejki (od
-strony head)
 
 
 
@@ -50,31 +10,5 @@ strony head)
 
 
 
-
-
-
-
-
-
-
-Test Kolejki powinien polegać na przesyłaniu danych z jednej karty (nadawcy) do drugiej
-(odbiorcy), lub z workera do głównego wątku. Do testów zrób osobą stronę która sprawdza
-czy kolejka poprawnie przesyła dane. Np w wokerze generuj dane i odstępy czasowe
-wrzucania danych pseudo losowe od jakiegoś seeda
-//Worker pseudo kod
-loop:
-cost timeOut = randA.los()*40
-cost data = randB.los()
-sleep(timeOut)
-fifo.push(data)
-//Głowny wątek
-loop:
-cost timeOut = randC.los()*40
-cost shoudRecive = randB&#39;.los() //Ten generator ma takie same seed jak
-
-randB
-sleep(timeout)
-cost data = fifo.pop()
-if(data!=shoudRecive) print error
 
 

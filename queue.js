@@ -1,55 +1,19 @@
 class Queue {
-  constructor(name) {
-    this.name = name;
-    this.queue = [];
+  constructor(key) {
+    this.store = localforage.createInstance({
+      name: key,
+    });
   }
 
-  pushHead(...elements) {
-    for (let el of elements.reverse()) {
-      this.queue.unshift(el);
-    }
-    this.saveQueue(this.name, this.queue);
-  }
-
-  popTail() {
-    this.queue.pop();
-    this.saveQueue(this.name, this.queue);
-  }
-
-  showTail() {
-    console.log(this.queue[this.queue.length - 1]);
-    return this.queue[this.queue.length - 1];
-  }
-
-  showHead() {
-    console.log(this.queue[0]);
-    return this.queue[0];
-  }
-
-  saveQueue() {
-    localforage
-      .setItem(this.name, this.queue)
-      .then(function (value) {})
-      .catch(function (err) {
-        console.log(err);
-      });
-  }
-
-  getQueue() {
-    localforage
-      .getItem(this.name)
-      .then(function (value) {
-        console.log(value);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
+  test() {
+    console.log("test");
+    return "test";
   }
 }
 
-const fifo = new Queue("Jason");
-fifo.pushHead("Pushed borzus", "Blubazaurus");
-fifo.showTail();
-fifo.showHead();
-fifo.popTail();
-fifo.getQueue();
+Queue.prototype.queue = (function () {
+  console.log("iife queue");
+})();
+
+const Test = new Queue("Test");
+console.log(Test);
