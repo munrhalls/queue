@@ -1,19 +1,20 @@
 class Queue {
-  constructor(key) {
+  constructor(name) {
     this.store = localforage.createInstance({
-      name: key,
+      name: name,
     });
   }
 
-  test() {
-    console.log("test");
-    return "test";
+  async test() {
+    console.log(await this.getQueue());
+  }
+
+  getQueue() {
+    return new Promise((resolve) => {
+      return this.store.getItem("queue").then((queue) => resolve(queue));
+    });
   }
 }
 
-Queue.prototype.queue = (function () {
-  console.log("iife queue");
-})();
-
 const Test = new Queue("Test");
-console.log(Test);
+console.log(Test.test());
