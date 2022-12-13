@@ -9,7 +9,7 @@
 
     async getAll() {
       const queue = await this.#lf_instance
-        .getItem("queue")
+        .getItem(this.#name)
         .then((val) => val)
         .catch((err) => console.log(err));
 
@@ -18,7 +18,7 @@
     }
   }
 
-  async function makeLFInstance() {
+  async function makeLocalForageInstance(name) {
     const lf_instance = new Promise(
       (resolve) => {
         resolve(
@@ -33,28 +33,24 @@
   }
 
   async function makeQueue(name) {
-    const lf_instance = await makeLFInstance();
-
-    console.log(lf_instance);
+    const lf_instance = await makeLocalForageInstance(name);
 
     const queue = await new Promise((resolve) => {
-      lf_instance.getItem("queue").then((val) => resolve(val));
+      lf_instance.getItem(name).then((queue) => resolve(queue));
     }).catch((err) => console.log(err));
 
     if (!queue)
       await new Promise((resolve) =>
-        lf_instance.setItem("queue", []).then((queue) => resolve(queue))
+        lf_instance
+          .setItem(name, [])
+          .then((queue) => resolve(queue))
+          .catch((err) => console.log(err))
       );
 
     const instance = new Queue(name, lf_instance);
     return instance;
   }
 
-  const Test = await new Promise((resolve) => {
-    makeQueue("Test").then((queue) => resolve(queue));
-  });
-
-  const Test2 = await makeQueue("Second test");
+  const Test2 = await makeQueue("Blubarzus");
   Test2.getAll();
-  Test.getAll();
 })();
