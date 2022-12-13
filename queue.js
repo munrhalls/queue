@@ -1,29 +1,38 @@
 (async function () {
   class Queue {
-    constructor(name, getQueue) {
-      this.store = localforage.createInstance({
-        name: name,
-      });
-      this.getQueue = getQueue.bind(this);
+    #name;
+    #lf_instance;
+    constructor(name, lf_instance) {
+      this.#name = name;
+      this.#lf_instance = lf_instance;
     }
 
-    async test() {
-      const queue = await this.getQueue();
+    async showQueue() {
+      const queue = await this.#lf_instance.getItem("queue").then((val) => val);
       console.log(queue);
     }
   }
 
-  function getQueue() {
-    return new Promise((resolve) => {
-      return this.store.getItem("queue").then((queue) => resolve(queue));
+  async function queueFactory(name) {
+    const lf_instance = localforage.createInstance({
+      name: name,
     });
+
+    const queue = await new Promise((resolve) => {
+      lf_instance.getItem("queue").then((val) => resolve(val));
+    });
+
+    if (!queue)
+      await new Promise((resolve) =>
+        lf_instance.setItem("queue", []).then((queue) => resolve(queue))
+      );
+
+    const instance = new Queue(name, lf_instance);
+    return instance;
   }
 
-  function makeQueue(name) {
-    return new Queue(name, getQueue);
-  }
-
-  const Test = makeQueue("Test");
-  const queue = await Test.getQueue();
-  console.log(queue);
+  const Test = await new Promise((resolve) => {
+    queueFactory("Test").then((queue) => resolve(queue));
+  });
+  console.log(Test);
 })();
