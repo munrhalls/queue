@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid.js";
-
 (async function () {
   class Queue {
     #name;
@@ -7,6 +5,10 @@ import { v4 as uuidv4 } from "uuid.js";
     constructor(name, lf_instance) {
       this.#name = name;
       this.#lf_instance = lf_instance;
+    }
+
+    generateId(queue) {
+      return `${this.#name}_ID-${queue.length}`;
     }
 
     async get_queue() {
@@ -27,12 +29,14 @@ import { v4 as uuidv4 } from "uuid.js";
 
     async push_head(element) {
       const queue = await this.get_queue();
+      const id = this.generateId(queue);
+      const next = queue[1] || "";
       const newHead = {
-        id: uuidv4(),
-        next: queue[1].id || "",
+        id: id,
+        next: next,
         value: element,
       };
-      queue[0].prev = newHead.id;
+      if (queue[0]) queue[0].prev = newHead.id;
       queue.unshift(newHead);
       await this.set_queue(queue);
     }
