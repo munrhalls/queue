@@ -7,8 +7,8 @@
       this.#lf_instance = lf_instance;
     }
 
-    generateId(queue) {
-      return `${this.#name}_ID-${queue.length}`;
+    generateId(length) {
+      return `${this.#name}_ID-${length}`;
     }
 
     async get_queue() {
@@ -29,7 +29,7 @@
 
     async push_head(element) {
       const queue = await this.get_queue();
-      const id = this.generateId(queue);
+      const id = this.generateId(queue.length);
       const next = queue[1] || "";
       const newHead = {
         id: id,
@@ -38,6 +38,7 @@
       };
       if (queue[0]) queue[0].prev = newHead.id;
       queue.unshift(newHead);
+
       await this.set_queue(queue);
     }
 
