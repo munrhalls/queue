@@ -29,7 +29,7 @@
 
     async update_queue(element) {
       const queue = await this.get_queue();
-      const id = this.generateId(queue.length - 1);
+      const id = this.generateId(queue.length);
       const newHead = {
         id: id,
         next: "",
@@ -103,7 +103,6 @@
 
   const Blubarzus = await makeQueue("Blubarzus");
   Blubarzus.push_head("Alright bro, zanzaghia!!!");
-  Blubarzus.pop_tail();
   const queue = await Blubarzus.get_queue();
 
   const tail = await Blubarzus.tail();
