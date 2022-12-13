@@ -30,22 +30,23 @@
     async update_queue(element) {
       const queue = await this.get_queue();
       const id = this.generateId(queue.length);
-      const nextId = queue[1] ? queue[1].id : "";
-
       const newHead = {
         id: id,
-        next: nextId,
+        next: "",
         value: element,
       };
 
-      if (queue[0]) queue[0].prev = newHead.id;
+      if (queue[0]) {
+        queue[0].prev = newHead.id;
+        newHead.next = queue[0].id;
+      }
+
       queue.unshift(newHead);
       return queue;
     }
 
     async push_head(element) {
       const update = await this.update_queue(element);
-
       await this.set_queue(update);
     }
 
