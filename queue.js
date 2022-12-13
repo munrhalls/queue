@@ -7,14 +7,32 @@
       this.#lf_instance = lf_instance;
     }
 
-    async getAll() {
-      const queue = await this.#lf_instance
+    async get_queue() {
+      const queue = this.#lf_instance
         .getItem(this.#name)
         .then((val) => val)
         .catch((err) => console.log(err));
 
+      return queue;
+    }
+
+    async set_queue(queue) {
+      this.#lf_instance
+        .setItem(this.#name, queue)
+        .then((val) => val)
+        .catch((err) => console.log(err));
+    }
+
+    async get_all() {
+      const queue = await this.get_queue();
+
       console.log(queue);
       return queue;
+    }
+
+    async push_head() {
+      const queue = this.get_queue();
+      queue.push("Some element");
     }
   }
 
@@ -52,5 +70,5 @@
   }
 
   const Test2 = await makeQueue("Blubarzus");
-  Test2.getAll();
+  Test2.get_all();
 })();
