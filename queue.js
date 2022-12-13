@@ -27,6 +27,15 @@
         .catch((err) => console.log(err));
     }
 
+    async setLastIndex(queue) {
+      if (Array.isArray(queue) && queue.length) {
+        this.#lf_instance
+          .setItem(`${this.#name}LastIndex`, queue[queue.length - 1].id)
+          .then((val) => val)
+          .catch((err) => console.log(err));
+      }
+    }
+
     async update_queue(element) {
       const queue = await this.get_queue();
       const id = this.generateId(queue.length);
@@ -41,6 +50,7 @@
         newHead.next = queue[0].id;
       }
 
+      this.setLastIndex(queue);
       queue.unshift(newHead);
       return queue;
     }
