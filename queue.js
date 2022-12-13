@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid.js";
+
 (async function () {
   class Queue {
     #name;
@@ -25,7 +27,13 @@
 
     async push_head(element) {
       const queue = await this.get_queue();
-      queue.push(element);
+      const newHead = {
+        id: uuidv4(),
+        next: queue[1].id || "",
+        value: element,
+      };
+      queue[0].prev = newHead.id;
+      queue.unshift(newHead);
       await this.set_queue(queue);
     }
 
@@ -79,8 +87,10 @@
     return instance;
   }
 
-  const Test2 = await makeQueue("Blubarzus");
-  const head = await Test2.head();
-  const tail = await Test2.tail();
-  console.log(head, "...", tail);
+  const Blubarzus = await makeQueue("Blubarzus");
+  Blubarzus.push_head("Alright bro, zanzaghia!!!");
+  const queue = await Blubarzus.get_queue();
+
+  const tail = await Blubarzus.tail();
+  console.log(queue);
 })();
