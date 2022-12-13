@@ -23,16 +23,10 @@
         .catch((err) => console.log(err));
     }
 
-    async get_all() {
+    async push_head(element) {
       const queue = await this.get_queue();
-
-      console.log(queue);
-      return queue;
-    }
-
-    async push_head() {
-      const queue = this.get_queue();
-      queue.push("Some element");
+      queue.push(element);
+      await this.set_queue(queue);
     }
   }
 
@@ -70,5 +64,7 @@
   }
 
   const Test2 = await makeQueue("Blubarzus");
-  Test2.get_all();
+  await Test2.push_head("123");
+  const queue = await Test2.get_queue();
+  console.log(queue);
 })();
