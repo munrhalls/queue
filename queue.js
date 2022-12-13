@@ -28,6 +28,22 @@
       queue.push(element);
       await this.set_queue(queue);
     }
+
+    async pop_tail() {
+      const queue = await this.get_queue();
+      queue.pop();
+      this.set_queue(queue);
+    }
+
+    async head() {
+      const queue = await this.get_queue();
+      return queue.shift();
+    }
+
+    async tail() {
+      const queue = await this.get_queue();
+      return queue.pop();
+    }
   }
 
   async function makeLocalForageInstance(name) {
@@ -64,7 +80,7 @@
   }
 
   const Test2 = await makeQueue("Blubarzus");
-  await Test2.push_head("123");
-  const queue = await Test2.get_queue();
-  console.log(queue);
+  const head = await Test2.head();
+  const tail = await Test2.tail();
+  console.log(head, "...", tail);
 })();
