@@ -1,4 +1,4 @@
-(async function () {
+export default (async function () {
   class Queue {
     #name;
     #lf_instance;
@@ -110,11 +110,4 @@
     const instance = new Queue(name, lf_instance);
     return instance;
   }
-
-  const Blubarzus = await makeQueue("Blubarzus");
-  Blubarzus.push_head("Alright bro, zanzaghia!!!");
-  const queue = await Blubarzus.get_queue();
-
-  const tail = await Blubarzus.tail();
-  console.log(queue);
 })();
