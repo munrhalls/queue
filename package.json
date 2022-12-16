@@ -2,9 +2,6 @@
     "name": "queue-localforage",
     "version": "1.0.0",
     "author": "munrhalls jpilik52@gmail.com",
-    "scripts": {
-        "test": "jest"
-    }
     
 }
 

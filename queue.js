@@ -91,7 +91,7 @@ async function makeLocalForageInstance(name) {
   return lf_instance;
 }
 
-export default async function makeQueue(name) {
+async function makeQueue(name) {
   const lf_instance = await makeLocalForageInstance(name);
 
   const queue = await new Promise((resolve) => {
@@ -108,4 +108,9 @@ export default async function makeQueue(name) {
 
   const instance = new Queue(name, lf_instance);
   return instance;
+};
+
+onmessage = function(e) {
+  const queueName = e.data;
+  postMessage(queueName)
 }
