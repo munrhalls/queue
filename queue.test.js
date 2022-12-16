@@ -15,7 +15,7 @@ refreshBtn.onclick = function (e) {
 };
 
 window.onload = async function () {
-  const BurlazyusC = await makeQueue("BurlazyusC");
+  const Burlazyus = await makeQueue("Burlazyus");
 
   let count = 0;
   let timeScore = 0;
@@ -30,7 +30,7 @@ window.onload = async function () {
       const rndSeed = seed[getRndMax(399)];
       rndSeed.time = `Hey, I showed myself after ${timeScore}`;
 
-      BurlazyusC.push_head(rndSeed);
+      Burlazyus.push_head(rndSeed);
       console.log(count);
       if (count < 10) {
         count++;
@@ -42,14 +42,14 @@ window.onload = async function () {
   }
   timeOut(1000);
 
-  const BurlazyusCQueue = await BurlazyusC.get_queue();
+  const BurlazyusQueue = await Burlazyus.get_queue();
 
   const DOMshowMeThatQueue = document.getElementById("show-me-that-queue");
-  for (let el of BurlazyusCQueue) {
+  for (let el of BurlazyusQueue) {
     const queueDiv = document.createElement("div");
     const li = document.createElement("li");
     const queueInstance = el?.value;
-    li.innerText = `${queueInstance.name}, I am from the ${BurlazyusC.name} queue`;
+    li.innerText = `${queueInstance.name}, I am from the ${Burlazyus.name} queue`;
     queueDiv.appendChild(li);
     const timeLi = document.createElement("li");
     timeLi.innerText =

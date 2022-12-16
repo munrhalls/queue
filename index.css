@@ -1,0 +1,21 @@
+
+main {
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    min-height: 5rem;
+    max-width: 10rem;
+    padding: 3rem;
+    background: black;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 2rem;
+}
