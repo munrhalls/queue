@@ -108,9 +108,8 @@ async function makeQueue(name) {
 
   const instance = new Queue(name, lf_instance);
   return instance;
-};
-
-onmessage = function(e) {
-  const queueName = e.data;
-  postMessage(queueName)
 }
+
+onmessage = async function (e) {
+  // mv to worker
+};

@@ -8,9 +8,12 @@ import seed from "./seed.js";
 // 5. read tail @queue.test.js === queue @queue.js
 // 6. random operations @queue.test.js === queue @queue.js
 
+const queueWorker = new Worker("/queue.js");
 
-const queueWorker = new Worker('/queue.js')
-queueWorker.postMessage('Message')
-queueWorker.onmessage = function(e) {
-    console.log(e.data)
-}
+queueWorker.postMessage({ name: "Burzan" });
+
+// mv to worker
+// onmessage = function (e) {
+//   console.log("main thread");
+//   console.log(e.data, "test file");
+// };
