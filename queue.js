@@ -1,18 +1,17 @@
 class Queue {
-  #name;
   #lf_instance;
   constructor(name, lf_instance) {
-    this.#name = name;
+    this.name = name;
     this.#lf_instance = lf_instance;
   }
 
   generateId(length) {
-    return `${this.#name}_ID-${length}`;
+    return `${this.name}_ID-${length}`;
   }
 
   async get_queue() {
     const queue = this.#lf_instance
-      .getItem(this.#name)
+      .getItem(this.name)
       .then((val) => val)
       .catch((err) => console.log(err));
 
@@ -21,7 +20,7 @@ class Queue {
 
   async set_queue(queue) {
     this.#lf_instance
-      .setItem(this.#name, queue)
+      .setItem(this.name, queue)
       .then((val) => val)
       .catch((err) => console.log(err));
   }
@@ -29,7 +28,7 @@ class Queue {
   async setLastIndex(queue) {
     if (Array.isArray(queue) && queue.length) {
       this.#lf_instance
-        .setItem(`${this.#name}LastIndex`, queue[queue.length - 1].id)
+        .setItem(`${this.name}LastIndex`, queue[queue.length - 1].id)
         .then((val) => val)
         .catch((err) => console.log(err));
     }

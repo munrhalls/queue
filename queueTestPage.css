@@ -1,0 +1,12 @@
+#show-me-that-queue {
+    margin: 2rem auto;
+    max-width: 80%;
+}
+
+#show-me-that-queue div {
+    margin: 1rem auto;
+}
+
+#show-me-that-queue div li:nth-child(2) {
+    color: #555;
+}

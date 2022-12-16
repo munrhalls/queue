@@ -10,9 +10,10 @@ import makeQueue from "./queue.js";
 // 6. random operations @queue.test.js === queue @queue.js
 
 window.onload = async function () {
-  const Burzus = await makeQueue("Burzus");
+  const Branzyum = await makeQueue("Branzyum");
 
   let count = 0;
+  let timeScore = 0;
 
   function getRndMax(max) {
     max = max || 5;
@@ -21,18 +22,36 @@ window.onload = async function () {
 
   function timeOut(interval) {
     setTimeout(function () {
-      Burzus.push_head(seed[getRndMax(399)]);
+      const rndSeed = seed[getRndMax(399)];
+      rndSeed.time = `Hey, I showed myself after ${timeScore}`;
 
+      Branzyum.push_head(rndSeed);
+      console.log(count);
       if (count < 10) {
         count++;
-        timeOut(getRndMax(3));
+        const rndTiming = getRndMax(2500);
+        timeScore += rndTiming / 1000;
+        timeOut(rndTiming);
       }
-    }, getRndMax(4) * 1000);
+    }, interval);
   }
   timeOut(1000);
 
-  const BurzusQueue = await Burzus.get_queue();
-  console.log(BurzusQueue);
+  const BranzyumQueue = await Branzyum.get_queue();
+
+  const DOMshowMeThatQueue = document.getElementById("show-me-that-queue");
+  for (let el of BranzyumQueue) {
+    const queueDiv = document.createElement("div");
+    const li = document.createElement("li");
+    const queueInstance = el?.value;
+    li.innerText = `${queueInstance.name}, I am from the ${Branzyum.name} queue`;
+    queueDiv.appendChild(li);
+    const timeLi = document.createElement("li");
+    timeLi.innerText =
+      el?.value?.time + " seconds, due to rnd timeout being set so.";
+    queueDiv.appendChild(timeLi);
+    DOMshowMeThatQueue.appendChild(queueDiv);
+  }
 };
 
 // mv to worker
