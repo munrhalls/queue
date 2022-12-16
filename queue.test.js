@@ -1,4 +1,7 @@
-import queue from "./queue";
+import makeQueue from "./queue.js";
 
-const TestingJason = document.getElementById("show-me-that-queue");
-console.log(TestingJason);
+const JasonTesting = await makeQueue("Test");
+JasonTesting.push_head("Some stuff");
+
+// worker to main thread
+// const myWorker = new Worker("./queue.js");
