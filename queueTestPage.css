@@ -1,12 +1,33 @@
+
+button {
+    display: block;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: black;
+    color: white;
+    border-radius: 5px;
+
+}
+
 #show-me-that-queue {
     margin: 2rem auto;
     max-width: 80%;
+    list-style-type: none;
 }
 
 #show-me-that-queue div {
+    background: black;
+    color: white;
+    border-radius: 5px;
+    padding: 0.5rem;
     margin: 1rem auto;
 }
 
+
+#show-me-that-queue div li {
+    text-decoration: none;
+    margin: 0.5rem;
+}
 #show-me-that-queue div li:nth-child(2) {
     color: #555;
 }

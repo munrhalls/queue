@@ -9,8 +9,13 @@ import makeQueue from "./queue.js";
 // 5. read tail @queue.test.js === queue @queue.js
 // 6. random operations @queue.test.js === queue @queue.js
 
+const refreshBtn = document.getElementById("queue-showman");
+refreshBtn.onclick = function (e) {
+  location.reload();
+};
+
 window.onload = async function () {
-  const Branzyum = await makeQueue("Branzyum");
+  const BurlazyusC = await makeQueue("BurlazyusC");
 
   let count = 0;
   let timeScore = 0;
@@ -25,7 +30,7 @@ window.onload = async function () {
       const rndSeed = seed[getRndMax(399)];
       rndSeed.time = `Hey, I showed myself after ${timeScore}`;
 
-      Branzyum.push_head(rndSeed);
+      BurlazyusC.push_head(rndSeed);
       console.log(count);
       if (count < 10) {
         count++;
@@ -37,14 +42,14 @@ window.onload = async function () {
   }
   timeOut(1000);
 
-  const BranzyumQueue = await Branzyum.get_queue();
+  const BurlazyusCQueue = await BurlazyusC.get_queue();
 
   const DOMshowMeThatQueue = document.getElementById("show-me-that-queue");
-  for (let el of BranzyumQueue) {
+  for (let el of BurlazyusCQueue) {
     const queueDiv = document.createElement("div");
     const li = document.createElement("li");
     const queueInstance = el?.value;
-    li.innerText = `${queueInstance.name}, I am from the ${Branzyum.name} queue`;
+    li.innerText = `${queueInstance.name}, I am from the ${BurlazyusC.name} queue`;
     queueDiv.appendChild(li);
     const timeLi = document.createElement("li");
     timeLi.innerText =
