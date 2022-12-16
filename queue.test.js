@@ -14,21 +14,20 @@ window.onload = async function () {
 
   let count = 0;
 
-  function getRandomInt() {
-    return Math.floor(Math.random() * 5);
+  function getRndMax(max) {
+    max = max || 5;
+    return Math.floor(Math.random() * max);
   }
 
   function timeOut(interval) {
-    const randomInt = getRandomInt();
-
     setTimeout(function () {
-      Burzus.push_head(seed[randomInt * 25]);
+      Burzus.push_head(seed[getRndMax(399)]);
 
       if (count < 10) {
         count++;
-        timeOut();
+        timeOut(getRndMax(3));
       }
-    }, randomInt * 1000);
+    }, getRndMax(4) * 1000);
   }
   timeOut(1000);
 
